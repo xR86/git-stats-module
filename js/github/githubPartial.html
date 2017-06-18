@@ -1,0 +1,80 @@
+<div class="panel col-md-10 col-md-offset-1">
+<!-- 	<div class="container-fluid">
+		<a href="#/" class="btn btn-raised btn-primary btn-block">Back</a>
+		<h2>cs-platform</h2>
+		<span>&nbsp;</span>
+	</div> -->
+  <span>&nbsp;</span>
+  <div class="row">
+    <div class="col-md-5 col-md-offset-05 panel">
+      <div class="form-group">
+        <label for="address">GET link:</label>
+        <input type="text" class="form-control" id="address-1" value="https://api.github.com/repos/xR86/algo/commits">
+      </div>
+      <a class="btn btn-raised btn-primary" onclick="get_request_old('#address-1', '#response-1');">GET</a>
+      
+      <div class="form-group">
+        <!-- <label for="comment">Response:</label> -->
+        <textarea class="form-control" rows="10" id="response-1"></textarea>
+      </div>
+    
+    </div>
+
+    <div class="col-md-5 col-md-offset-05 panel">
+      <div class="form-group">
+        <label for="address">GET link:</label>
+        <input type="text" class="form-control" id="address-2" value="https://api.github.com/users/xR86/orgs">
+      </div>
+      <a class="btn btn-raised btn-primary" onclick="get_request_old('#address-2', '#response-2');">GET</a>
+      
+      <div class="form-group">
+        <!-- <label for="comment">Response:</label> -->
+        <textarea class="form-control" rows="10" id="response-2"></textarea>
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-md-5 col-md-offset-05 panel">
+
+    </div>
+  </div>
+  
+
+  <a class="btn btn-raised btn-primary" onclick="get_orgs();">GET orgs</a> <span>(For xR86)</span>
+  
+  <div class="form-group">
+    <!-- <label for="comment">Response:</label> -->
+    <textarea class="form-control" rows="1" id="responseOrgs"></textarea>
+  </div>
+  
+	
+
+
+  <a class="btn btn-raised btn-primary" onclick="get_repos();">GET repos</a> <span>(For xR86)</span>
+  
+  <div class="form-group">
+    <!-- <label for="comment">Response:</label> -->
+    <textarea class="form-control" rows="3" id="responseRepos"></textarea>
+  </div>
+
+
+  <!-- <a class="btn btn-raised btn-primary" onclick="get_projects();">GET projects</a>
+  
+  <div class="form-group">
+    <textarea class="form-control" rows="3" id="responseProjects"></textarea>
+  </div> -->
+
+
+  <a class="btn btn-raised btn-primary" onclick="get_pulls();">GET pull request</a> <span>(For 2B5/ia-3B5 repo)</span>
+  
+  <div class="form-group">
+    <textarea class="form-control" rows="3" id="responsePulls"></textarea>
+  </div>
+
+  <p>&nbsp;</p>
+
+  <script src="js/github/github.js"></script>
+</div>
