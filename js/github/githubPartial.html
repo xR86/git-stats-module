@@ -32,49 +32,72 @@
         <textarea class="form-control" rows="10" id="response-2"></textarea>
       </div>
 
+      <div class="row" style="margin: 10px">
+        <div class="col-md-2">
+          <a href="/...">
+            <img src="https://avatars0.githubusercontent.com/u/6615685?v=3" class="img-thumbnail" alt="3b5">
+            <!-- <span>3B5</span> -->
+          </a>
+        </div>
+        <div class="col-md-2">
+          <a href="/...">
+            <img src="https://avatars0.githubusercontent.com/u/6615685?v=3" class="img-thumbnail" alt="3b5">
+            <!-- <span>3B5</span> -->
+          </a>
+        </div>
+      </div>
+
     </div>
   </div>
 
 
   <div class="row">
     <div class="col-md-5 col-md-offset-05 panel">
+      <a class="btn btn-raised btn-primary" onclick="get_orgs();">GET orgs</a> <span>(For xR86)</span>
 
+      <div class="form-group">
+        <!-- <label for="comment">Response:</label> -->
+        <textarea class="form-control" rows="1" id="responseOrgs"></textarea>
+      </div>
+    </div>
+    <div class="col-md-5 col-md-offset-05 panel">
+      <a class="btn btn-raised btn-primary" onclick="get_repos();">GET repos</a> <span>(For xR86)</span>
+  
+      <div class="form-group">
+        <!-- <label for="comment">Response:</label> -->
+        <textarea class="form-control" rows="3" id="responseRepos"></textarea>
+      </div>
     </div>
   </div>
   
-
-  <a class="btn btn-raised btn-primary" onclick="get_orgs();">GET orgs</a> <span>(For xR86)</span>
-  
-  <div class="form-group">
-    <!-- <label for="comment">Response:</label> -->
-    <textarea class="form-control" rows="1" id="responseOrgs"></textarea>
-  </div>
-  
-	
-
-
-  <a class="btn btn-raised btn-primary" onclick="get_repos();">GET repos</a> <span>(For xR86)</span>
-  
-  <div class="form-group">
-    <!-- <label for="comment">Response:</label> -->
-    <textarea class="form-control" rows="3" id="responseRepos"></textarea>
+  <div class="row">
+    <div class="col-md-5 col-md-offset-05 panel">
+      <a class="btn btn-raised btn-primary" onclick="get_pulls();">GET pull request</a> <span>(For 2B5/ia-3B5 repo)</span>
+      
+      <div class="form-group">
+        <textarea class="form-control" rows="3" id="responsePulls"></textarea>
+      </div>
+    </div>
   </div>
 
-
-  <!-- <a class="btn btn-raised btn-primary" onclick="get_projects();">GET projects</a>
+<!--   <div class="row">
+    <div class="col-md-5 col-md-offset-05 panel">
+      <a class="btn btn-raised btn-primary" onclick="get_projects();">GET projects</a>
   
-  <div class="form-group">
-    <textarea class="form-control" rows="3" id="responseProjects"></textarea>
+      <div class="form-group">
+        <textarea class="form-control" rows="3" id="responseProjects"></textarea>
+      </div>
+    </div>
   </div> -->
 
-
-  <a class="btn btn-raised btn-primary" onclick="get_pulls();">GET pull request</a> <span>(For 2B5/ia-3B5 repo)</span>
-  
-  <div class="form-group">
-    <textarea class="form-control" rows="3" id="responsePulls"></textarea>
-  </div>
+<!--   <div class="row">
+    <div class="col-md-5 col-md-offset-05 panel">
+      
+    </div>
+  </div> -->
 
   <p>&nbsp;</p>
 
+  <script src="js/github/utils.js"></script>
   <script src="js/github/github.js"></script>
 </div>

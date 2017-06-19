@@ -4,36 +4,27 @@ https://developer.github.com/v3/repos/commits/
 
 
 http://www.unixtimestamp.com/index.php
+*/
 
+/**
+ * harness function - collects all relevant onclick calls from the html, and calls them
+ * - can be used to call all the endpoints such that the page is populated onLoad (window.onload = harness;)
+ * @return {[type]} [description]
  */
-
-//useful: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
-
-//https://gist.github.com/niallo/3109252#gistcomment-1474669
-function parse_link_header(header) {
-    if (header.length === 0) {
-        throw new Error("input must not be of zero length");
-    }
-
-    // Split parts by comma
-    var parts = header.split(',');
-    var links = {};
-    // Parse each part into a named link
-    for(var i=0; i<parts.length; i++) {
-        var section = parts[i].split(';');
-        if (section.length !== 2) {
-            throw new Error("section could not be split on ';'");
-        }
-        var url = section[0].replace(/<(.*)>/, '$1').trim();
-        var name = section[1].replace(/rel="(.*)"/, '$1').trim();
-        links[name] = url;
-    }
-    return links;
+function harness(){
+  get_request_old('#address-1', '#response-1');
+  get_request_old('#address-2', '#response-2');
+  get_orgs();
+  get_repos();
+  get_pulls();
+  //get_projects();
 }
 
 // on every click, the remaining calls are displayed
 document.addEventListener("click", function(event){
-  check_remaining_calls();
+  setTimeout(function(){
+    check_remaining_calls();
+  }, 1000);
 });
 
 function check_remaining_calls(){
@@ -42,10 +33,11 @@ function check_remaining_calls(){
 
     var parsedXhrResp = JSON.parse(xhrResp);
 
-    //console.log('xhrResp: ', xhrResp);
+    console.log('/*check_remaining_calls==');
     console.log('xhrResp["rate"]: ', parsedXhrResp["rate"]);
     console.log('xhrResp["rate"]["remaining"]: ', parsedXhrResp["rate"]["remaining"]);
     document.querySelector('#gitApiCalls').innerText = parsedXhrResp["rate"]["remaining"];
+    console.log('==end check_remaining_calls*/');
   });
 }
 check_remaining_calls();
@@ -114,81 +106,41 @@ function get_request_old(siteLocation, responseLocation){
   xhr.send(null);
 }
 
-// function get_request_simple(site){
-//   var xhr = new XMLHttpRequest();
-//   xhr.onreadystatechange = function() {
-//       if (xhr.readyState == XMLHttpRequest.DONE) {
-//           console.log('get_request_simple: ', xhr.responseText)
-//           return xhr.responseText;
-//       }
-//   }
-//   xhr.open('GET', site, true);
-//   xhr.send(null);
-// }
-
-//https://stackoverflow.com/questions/30008114/how-do-i-promisify-native-xhr
-function get_request_simple(url, done) {
-  var xhr = new XMLHttpRequest();
-  xhr.open('GET', url, true);
-  xhr.onload = function () {
-    //console.log('get_request_simple: ', xhr.response);
-    done(null, xhr.response);
-  };
-  xhr.onerror = function () {
-    done(xhr.response);
-  };
-  xhr.send(null);
-}
-
 
 function get_orgs(){
-  var xhr = new XMLHttpRequest();
-  xhr.onreadystatechange = function() {
-      if (xhr.readyState == XMLHttpRequest.DONE) {
-          //console.log(xhr.responseText);
-          
-          response = JSON.parse(xhr.responseText);
-          console.log(response);
+  get_request_simple('https://api.github.com/users/xR86/orgs', function (err, xhrResp) {
+    if (err) { throw err; }
 
-          proc = []
-          for (var i = 0; i < response.length; i++){
-            console.log(response[i].login);
-            proc.push(response[i].login);
-          }
-          console.log(response);
-          document.querySelector('#responseOrgs').value = proc;
-          
-      }
-  }
-  xhr.open('GET', 'https://api.github.com/users/xR86/orgs', true);
-  xhr.send(null);
+    var response = JSON.parse(xhrResp);
+
+    proc = []
+    for (var i = 0; i < response.length; i++){
+      console.log(response[i].login);
+      proc.push(response[i].login);
+    }
+    console.log(response);
+    document.querySelector('#responseOrgs').value = proc;
+  });
 }
 
 
 function get_repos(){
-  var xhr = new XMLHttpRequest();
-  xhr.onreadystatechange = function() {
-      if (xhr.readyState == XMLHttpRequest.DONE) {
-          //console.log(xhr.responseText);
-          
-          response = JSON.parse(xhr.responseText);
-          console.log(response);
+  get_request_simple('https://api.github.com/users/xR86/repos', function (err, xhrResp) {
+    if (err) { throw err; }
 
-          proc = []
-          proc_str = ''
-          for (var i = 0; i < response.length; i++){
-            console.log(response[i].full_name);
-            //proc.push(response[i].full_name);
-            proc_str += response[i].full_name
-            proc_str += '\n' //CR LF... //'<br>' not working
-          }
-          console.log(response);
-          document.querySelector('#responseRepos').value = proc_str;
-          
-      }
-  }
-  xhr.open('GET', 'https://api.github.com/users/xR86/repos', true);
-  xhr.send(null);
+    var response = JSON.parse(xhrResp);
+
+    proc = []
+    proc_str = ''
+    for (var i = 0; i < response.length; i++){
+      console.log(response[i].full_name);
+      //proc.push(response[i].full_name);
+      proc_str += response[i].full_name
+      proc_str += '\n' //CR LF... //'<br>' not working
+    }
+    console.log(response);
+    document.querySelector('#responseRepos').value = proc_str;
+  });
 }
 
 
