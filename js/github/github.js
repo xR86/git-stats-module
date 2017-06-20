@@ -143,6 +143,34 @@ function get_repos(){
   });
 }
 
+function get_pulls(){
+  var params = 'state=all'
+
+  // var params = JSON.stringify({ state: 'all' });
+  // xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+  // // xhr.setRequestHeader("Content-length", params.length);
+  // xhr.send(params);
+
+  get_request_simple('https://api.github.com/repos/2B5/ia-3B5/pulls' + '?' + params, function (err, xhrResp) {
+    if (err) { throw err; }
+
+    response = JSON.parse(xhrResp);
+    console.log(response);
+
+    proc = []
+    proc_str = ''
+    for (var i = 0; i < response.length; i++){
+      //console.log(response[i].title);
+      //proc.push(response[i].title);
+      proc_str += response[i].title
+      proc_str += '\n'
+    }
+    //console.log(response);
+    document.querySelector('#responsePulls').value = proc_str;
+  });
+}
+
+/****EXPERIMENTAL API FEATURES*****/
 
 function get_projects(){
   var xhr = new XMLHttpRequest();
@@ -169,38 +197,5 @@ function get_projects(){
   xhr.open('GET', 'https://api.github.com/repos/xR86/ml-stuff/projects', true); 
   /*also requires auth*/
   xhr.setRequestHeader('Accept', 'application/vnd.github.inertia-preview+json'); /*still in preview, this is needed*/
-  xhr.send(null);
-}
-
-
-function get_pulls(){
-  var xhr = new XMLHttpRequest();
-  xhr.onreadystatechange = function() {
-      if (xhr.readyState == XMLHttpRequest.DONE) {
-          
-          response = JSON.parse(xhr.responseText);
-          console.log(response);
-
-          proc = []
-          proc_str = ''
-          for (var i = 0; i < response.length; i++){
-            //console.log(response[i].title);
-            //proc.push(response[i].title);
-            proc_str += response[i].title
-            proc_str += '\n'
-          }
-          //console.log(response);
-          document.querySelector('#responsePulls').value = proc_str;
-          
-      }
-  }
-  var params = 'state=all'
-  xhr.open('GET', 'https://api.github.com/repos/2B5/ia-3B5/pulls' + '?' + params, true);
-  // var params = JSON.stringify({ state: 'all' });
-
-  // xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
-  // // xhr.setRequestHeader("Content-length", params.length);
-
-  // xhr.send(params);
   xhr.send(null);
 }

@@ -16,6 +16,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.10/css/ripples.css" />
 	<!-- <link rel="stylesheet" href="vendor/bootstrap-material-design/bootstrap-material-design.css"> -->
 	<!-- <link rel="stylesheet" href="vendor/bootstrap-material-design/ripples.min.css"> -->
+	<link rel="stylesheet" href="css/style.css">
 
 </head>
 
@@ -29,21 +30,20 @@
 					<span class="icon-bar"></span>
 				</button>
 				<a class="navbar-brand" href="#">cs-platform<div class="ripple-container"></div></a>
+				<a class="navbar-brand" href="#"> &gt; </a>
+				<a class="navbar-brand" href="#">git module<div class="ripple-container"></div></a>
 			</div>
 			<ul class="nav navbar-nav navbar-right">
 				<!-- <li><a href="#/login">Login</a></li> -->
-				<li style="padding: 2rem"><span id="gitApiCalls">60</span> <span> API calls remaining till reset</span></li>
+				<li>
+					<a class="ripple-wrapper"><span id="gitApiCalls">60</span> <span> API calls remaining till reset</span></a>	
+					<div class="ripple-container"></div>
+				</li>
 			</ul>
 		</div>
 	</div>
 
     <div ui-view></div>
-
-    <style>
-	    .col-md-offset-05 {
-    		margin-left: 4.15%;
-    	}
-    </style>
 
 
     <!-- Design -->
