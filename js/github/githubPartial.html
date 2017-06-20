@@ -7,8 +7,15 @@
 
   <span>&nbsp;</span>
   
-  <a class="btn btn-warning" onclick="harness();">Harness</a>
-
+  <div id="main_dev" class="btn btn-primary btn-xs source-button" onclick="toggle_element('#main_dev_container')">
+    &lt; &gt;
+    <div class="ripple-container"></div>
+  </div>
+  
+  <div class="dev-container" id="main_dev_container">
+    <a class="btn btn-warning" onclick="harness();">Harness - update page</a>
+  </div>
+  
   <span>&nbsp;</span>
   <div class="row">
     <div class="col-md-5 col-md-offset-05 panel">
@@ -61,12 +68,22 @@
       </div>
     </div>
     <div class="col-md-5 col-md-offset-05 panel">
-      <a class="btn btn-raised btn-primary" onclick="get_repos();">GET repos</a> <span>(For xR86)</span>
-  
-      <div class="form-group">
-        <!-- <label for="comment">Response:</label> -->
-        <textarea class="form-control" rows="3" id="responseRepos"></textarea>
+      <div id="repos_dev" class="btn btn-primary btn-xs source-button" onclick="toggle_element('#repos_dev_container')">
+        &lt; &gt;
+        <div class="ripple-container"></div>
       </div>
+
+      <div class="dev-container" id="repos_dev_container">
+        <a class="btn btn-raised btn-primary" onclick="get_repos();">GET repos</a> <span>(For xR86)</span>
+    
+        <div class="form-group">
+          <!-- <label for="comment">Response:</label> -->
+          <textarea class="form-control" rows="3" id="responseRepos"></textarea>
+        </div>
+      </div>
+
+      <div class="widget-description">The user has <span id="repos-count">?</span> repos:</div>
+      <div class="list-container" id="repos-container" style="margin: 10px">
     </div>
   </div>
   

@@ -20,11 +20,28 @@ function harness(){
   //get_projects();
 }
 
+//window.addEventListener("load", function(){
+// window.onload = function(){
+//   console.log('[Document] Document was loaded');
+//   get_orgs();
+//   get_repos();
+// };
+
+var interval = setInterval(function() {
+  if(document.readyState === 'complete') {
+      clearInterval(interval);
+      console.log('[Document] Document was loaded');
+      get_orgs();
+      get_repos();
+  }
+}, 100);
+
+
 // on every click, the remaining calls are displayed
 document.addEventListener("click", function(event){
   setTimeout(function(){
     check_remaining_calls();
-  }, 1000);
+  }, 1000); //wait for most xhr to occur, such that the github counter is decremented
 });
 
 function check_remaining_calls(){
@@ -145,15 +162,27 @@ function get_repos(){
     var response = JSON.parse(xhrResp);
 
     proc = []
+    elem = []
     proc_str = ''
     for (var i = 0; i < response.length; i++){
-      console.log(response[i].full_name);
+      //console.log(response[i].full_name);
       //proc.push(response[i].full_name);
       proc_str += response[i].full_name
       proc_str += '\n' //CR LF... //'<br>' not working
+
+      var elemM = '<div class=\"' + (response[i].fork ? 'fork-link':'') + '\">' + 
+        '<a href=\"' + response[i].html_url + '\">' + response[i].full_name + '&nbsp;' +
+        (response[i].fork ? '<i class=\"fa fa-code-fork\" aria-hidden=\"true\"></i>':'') +
+        '</a></div>';
+      elem.push(elemM);
     }
     console.log(response);
     document.querySelector('#responseRepos').value = proc_str;
+
+    document.querySelector('#repos-count').textContent = elem.length;
+    elem.forEach( function(item){
+      document.querySelector('#repos-container').insertAdjacentHTML( 'beforeend', item );
+    });
   });
 }
 

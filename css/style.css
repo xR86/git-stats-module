@@ -29,6 +29,14 @@
 	padding-right: 1rem;
 }
 
+.list-container .fa{
+	font-size: 2rem;
+}
+
+.fork-link a, .fork-link a:focus, .fork-link a:hover{
+	color: #b1b1b1;
+}
+
 .source-button{
     position: absolute;
     top: 0;

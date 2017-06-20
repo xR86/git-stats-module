@@ -16,6 +16,8 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.10/css/ripples.css" />
 	<!-- <link rel="stylesheet" href="vendor/bootstrap-material-design/bootstrap-material-design.css"> -->
 	<!-- <link rel="stylesheet" href="vendor/bootstrap-material-design/ripples.min.css"> -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+
 	<link rel="stylesheet" href="css/style.css">
 
 </head>
@@ -36,7 +38,7 @@
 			<ul class="nav navbar-nav navbar-right">
 				<!-- <li><a href="#/login">Login</a></li> -->
 				<li>
-					<a class="ripple-wrapper"><span id="gitApiCalls">60</span> <span> API calls remaining till reset</span></a>	
+					<a class="ripple-wrapper" onclick="check_remaining_calls()"><span id="gitApiCalls">60</span> <span> API calls remaining till reset</span></a>
 					<div class="ripple-container"></div>
 				</li>
 			</ul>
