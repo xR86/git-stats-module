@@ -48,3 +48,23 @@ function request_simple(method, url, done) {
   };
   xhr.send(null);
 }
+
+//https://stackoverflow.com/questions/16748813/mydiv-style-display-returns-blank-when-set-in-master-stylesheet
+function getStyle(id, name){
+  var element = document.querySelector(id);
+  return element.currentStyle ? element.currentStyle[name] : window.getComputedStyle ? window.getComputedStyle(element, null).getPropertyValue(name) : null;
+}
+
+function toggle_element(location){
+  var displayStyle = getStyle(location, 'display');
+  var displayValue = document.querySelector(location).style.display;
+  console.log('displayStyle: ', displayStyle);
+  console.log('displayValue: ', displayValue);
+
+  if(displayStyle == "none"){
+    document.querySelector(location).style.display = "initial";
+  } else {
+    document.querySelector(location).style.display = "none";
+  }
+}
+

@@ -114,12 +114,26 @@ function get_orgs(){
     var response = JSON.parse(xhrResp);
 
     proc = []
+    elem = []
     for (var i = 0; i < response.length; i++){
       console.log(response[i].login);
       proc.push(response[i].login);
+
+      var elemM = '<div class=\"col-md-3\">' + 
+        '<a href=\"' + 'https://github.com/' + response[i].login + '\">' + 
+        '<img src=\"' + response[i].avatar_url + '\" class=\"img-thumbnail\"></a></div>';
+      elem.push(elemM);
     }
     console.log(response);
     document.querySelector('#responseOrgs').value = proc;
+    //document.querySelector('#orgs-container').appendChild = elem;
+    //elem.forEach(callback.bind(thisArg));
+    document.querySelector('#orgs-count').textContent = elem.length;
+    elem.forEach( function(item){
+      //console.log('item: ', item);
+      //document.querySelector('#orgs-container').appendChild = item;
+      document.querySelector('#orgs-container').insertAdjacentHTML( 'beforeend', item );
+    });
   });
 }
 

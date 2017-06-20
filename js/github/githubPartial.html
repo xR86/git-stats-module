@@ -36,33 +36,28 @@
         <!-- <label for="comment">Response:</label> -->
         <textarea class="form-control" rows="10" id="response-2"></textarea>
       </div>
-
-      <div class="row" style="margin: 10px">
-        <div class="col-md-2">
-          <a href="/...">
-            <img src="https://avatars0.githubusercontent.com/u/6615685?v=3" class="img-thumbnail" alt="3b5">
-            <!-- <span>3B5</span> -->
-          </a>
-        </div>
-        <div class="col-md-2">
-          <a href="/...">
-            <img src="https://avatars0.githubusercontent.com/u/6615685?v=3" class="img-thumbnail" alt="3b5">
-            <!-- <span>3B5</span> -->
-          </a>
-        </div>
-      </div>
-
     </div>
   </div>
 
 
   <div class="row">
-    <div class="col-md-5 col-md-offset-05 panel">
-      <a class="btn btn-raised btn-primary" onclick="get_orgs();">GET orgs</a> <span>(For xR86)</span>
+    <div class="col-md-4 col-md-offset-05 panel">
+      <div id="orgs_dev" class="btn btn-primary btn-xs source-button" onclick="toggle_element('#orgs_dev_container')">
+        &lt; &gt;
+        <div class="ripple-container"></div>
+      </div>
+      
+      <div class="dev-container" id="orgs_dev_container">
+        <a class="btn btn-raised btn-primary" onclick="get_orgs();">GET orgs</a> <span>(For xR86)</span>
 
-      <div class="form-group">
-        <!-- <label for="comment">Response:</label> -->
-        <textarea class="form-control" rows="1" id="responseOrgs"></textarea>
+        <div class="form-group">
+          <!-- <label for="comment">Response:</label> -->
+          <textarea class="form-control" rows="1" id="responseOrgs"></textarea>
+        </div>
+      </div>
+
+      <div class="widget-description">The user is a member of <span id="orgs-count">?</span> organizations:</div>
+      <div class="row icon-container" id="orgs-container" style="margin: 10px">
       </div>
     </div>
     <div class="col-md-5 col-md-offset-05 panel">
