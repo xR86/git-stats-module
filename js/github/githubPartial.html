@@ -5,6 +5,88 @@
 		<span>&nbsp;</span>
 	</div> -->
 
+<div id="complete-dialog" class="modal fade in" tabindex="-1" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="close-dialog1" style="font-size: 2em">×</button>
+        <h4 class="modal-title">'Tis not finished</h4>
+      </div>
+      <div class="modal-body">
+        <img src="img/knights_of_ni.gif">
+        <audio id="modal-sound1">
+          <source src="http://www.intriguing.com/mp/_sounds/hg/knights.wav" type="audio/ogg">
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary btn-raised" data-dismiss="modal" id="close-dialog2">
+          Dismiss
+          <div class="ripple-container">
+            <div class="ripple ripple-on ripple-out" style="left: 54px; top: 27px; background-color: rgb(0, 150, 136); transform: scale(11.125);">
+            </div>
+          </div>
+        </button>
+        <audio id="modal-sound2">
+          <source src= "http://www.intriguing.com/mp/_sounds/hg/shrub.wav" type="audio/ogg">
+          Your browser does not support the audio element.
+        </audio>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<link href="https://fonts.googleapis.com/css?family=MedievalSharp" rel="stylesheet">
+<style>
+.modal-backdrop {
+  background: rgba(150, 108, 84, .7);
+}
+.modal-backdrop.in {
+  filter: alpha(opacity=50);
+  opacity: 0.9;
+}
+
+.modal-title{
+  font-family: 'MedievalSharp', cursive;
+  font-size: 3em;
+  color: rgba(76, 0, 0, 0.78);
+  font-weight: 700;
+}
+
+.modal-content{
+  background-image: url("img/wood_bg.jpg");
+  border-style: groove;
+  border-color: #634f41;
+}
+
+</style>
+<script>
+$( "#complete-dialog" ).on('show.bs.modal', function(){
+    //stop original if playing
+    var original = document.getElementById("modal-sound2");
+    original.pause();
+    original.currentTime = 0;
+
+    //start
+    var audio = document.getElementById("modal-sound1");
+    audio.autoplay = true;
+    audio.load();
+});
+
+$( "#close-dialog1, #close-dialog2" ).on('click', function(){
+    //stop original if playing
+    var original = document.getElementById("modal-sound1");
+    original.pause();
+    original.currentTime = 0;
+
+    //start
+    var audio = document.getElementById("modal-sound2");
+    audio.autoplay = true;
+    audio.load();
+});
+</script>
+
   <span>&nbsp;</span>
   
   <div id="main_dev" class="btn btn-primary btn-xs source-button" onclick="toggle_element('#main_dev_container')">
@@ -13,6 +95,7 @@
   </div>
   
   <div class="dev-container" id="main_dev_container">
+    <button type="button" class="btn btn-primary" id="open-modal" data-toggle="modal" data-target="#complete-dialog">Open dialog<div class="ripple-container"></div></button>
     <a class="btn btn-warning" onclick="harness();">Harness - update page</a>
   </div>
   
@@ -64,10 +147,9 @@
       </div>
 
       <div class="widget-description">The user is a member of <span id="orgs-count">?</span> organizations:</div>
-      <div class="row icon-container" id="orgs-container" style="margin: 10px">
-      </div>
+      <div class="row icon-container" id="orgs-container" style="margin: 10px"></div>
     </div>
-    <div class="col-md-5 col-md-offset-05 panel">
+    <div class="col-md-2 col-md-offset-05 panel">
       <div id="repos_dev" class="btn btn-primary btn-xs source-button" onclick="toggle_element('#repos_dev_container')">
         &lt; &gt;
         <div class="ripple-container"></div>
@@ -83,7 +165,7 @@
       </div>
 
       <div class="widget-description">The user has <span id="repos-count">?</span> repos:</div>
-      <div class="list-container" id="repos-container" style="margin: 10px">
+      <div class="list-container" id="repos-container" style="margin: 10px"></div>
     </div>
   </div>
   

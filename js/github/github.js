@@ -33,6 +33,8 @@ var interval = setInterval(function() {
       console.log('[Document] Document was loaded');
       get_orgs();
       get_repos();
+      //document.getElementById("complete-dialog").click();
+      $("#open-modal").click();
   }
 }, 100);
 
