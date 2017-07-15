@@ -131,6 +131,7 @@ $( "#close-dialog1, #close-dialog2" ).on('click', function(){
 
 
   <div class="row">
+    <!-- Organization container -->
     <div class="col-md-4 col-md-offset-05 panel">
       <div id="orgs_dev" class="btn btn-primary btn-xs source-button" onclick="toggle_element('#orgs_dev_container')">
         &lt; &gt;
@@ -149,6 +150,7 @@ $( "#close-dialog1, #close-dialog2" ).on('click', function(){
       <div class="widget-description">The user is a member of <span id="orgs-count">?</span> organizations:</div>
       <div class="row icon-container" id="orgs-container" style="margin: 10px"></div>
     </div>
+    <!-- Repos container -->
     <div class="col-md-2 col-md-offset-05 panel">
       <div id="repos_dev" class="btn btn-primary btn-xs source-button" onclick="toggle_element('#repos_dev_container')">
         &lt; &gt;
@@ -166,6 +168,25 @@ $( "#close-dialog1, #close-dialog2" ).on('click', function(){
 
       <div class="widget-description">The user has <span id="repos-count">?</span> repos:</div>
       <div class="list-container" id="repos-container" style="margin: 10px"></div>
+    </div>
+    <!-- Languages container -->
+    <div class="col-md-2 col-md-offset-05 panel">
+      <div id="lang_dev" class="btn btn-primary btn-xs source-button" onclick="toggle_element('#lang_dev_container')">
+        &lt; &gt;
+        <div class="ripple-container"></div>
+      </div>
+
+      <div class="dev-container" id="lang_dev_container">
+        <a class="btn btn-raised btn-primary" onclick="get_lang();">GET langs</a>
+    
+        <div class="form-group">
+          <!-- <label for="comment">Response:</label> -->
+          <textarea class="form-control" rows="3" id="responseLang"></textarea>
+        </div>
+      </div>
+
+      <div class="widget-description">The user has used <span id="lang-count">?</span> languages:</div>
+      <div class="list-container" id="lang-container" style="margin: 10px"></div>
     </div>
   </div>
   

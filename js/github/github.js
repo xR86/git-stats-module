@@ -33,6 +33,7 @@ var interval = setInterval(function() {
       console.log('[Document] Document was loaded');
       get_orgs();
       get_repos();
+      //get_lang();
       //document.getElementById("complete-dialog").click();
       $("#open-modal").click();
   }
@@ -185,6 +186,74 @@ function get_repos(){
     elem.forEach( function(item){
       document.querySelector('#repos-container').insertAdjacentHTML( 'beforeend', item );
     });
+  });
+}
+
+//too many API calls, start to cache responses
+function get_lang(){
+  reposNames = [];
+
+  get_request_simple('https://api.github.com/users/xR86/repos', function (err, xhrResp) {
+    if (err) { throw err; }
+
+    var response = JSON.parse(xhrResp);
+    for (var i = 0; i < response.length; i++){
+      if(!response[i].fork){
+        reposNames.push(response[i].name);
+      }
+    }
+
+    console.log('reposNames: ', reposNames);
+    console.log('reposNames.length: ', reposNames.length);
+
+    langs = {}
+    inProgressSum = 0; //starts as 0, and evolves based on promises
+    for(var i = 0; i < reposNames.length; i++){
+      console.log('###');
+      console.log(reposNames);
+      console.log(reposNames[i]);
+      console.log('###');
+
+      get_request_simple('https://api.github.com/repos/xR86/' + reposNames[i] + '/languages', function (err, xhrResp) {
+        if (err) { throw err; }
+        inProgressSum += 1;
+
+        var response = JSON.parse(xhrResp);
+        
+        for (var key in response){
+          console.log('langs.hasOwnProperty(key): ', langs.hasOwnProperty(key));
+          console.log('response[key]: ', response[key]);
+          if(!langs.hasOwnProperty(key)){
+            langs[key] = 1;
+          } else {
+            langs[key]++;
+          }
+        }
+
+        inProgressSum -= 1;
+      });
+
+      if(inProgressSum == 0){
+        elem = [];
+        proc_str = '';
+        console.log('langs: ', langs);
+        for (var key in langs) {
+          var elemM = '<div><span>' + key + ': ' + String(langs[key]) + '</span></div>';
+          elem.push(elemM);
+
+          proc_str += key
+          proc_str += '\n' //CR LF... //'<br>' not working
+        }
+
+        console.log(response);
+        document.querySelector('#responseLang').value = proc_str;
+
+        document.querySelector('#lang-count').textContent = elem.length;
+        elem.forEach( function(item){
+          document.querySelector('#lang-container').insertAdjacentHTML( 'beforeend', item );
+        });
+      }
+    }
   });
 }
 
