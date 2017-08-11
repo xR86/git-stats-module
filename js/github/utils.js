@@ -68,3 +68,52 @@ function toggle_element(location){
   }
 }
 
+function unix_to_js(unix_timestamp){
+  // multiplied by 1000 so that the argument is in milliseconds, not seconds.
+  var date = new Date(unix_timestamp*1000);
+  // Hours part from the timestamp
+  var hours = date.getHours();
+  // Minutes part from the timestamp
+  var minutes = "0" + date.getMinutes();
+  // Seconds part from the timestamp
+  var seconds = "0" + date.getSeconds();
+
+  // Will display time in 10:30:23 format
+  //var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+  return {
+    "date": date,
+    "hr": hours,
+    "min": minutes,
+    "s": seconds
+  }
+}
+
+function show_remaining(end) {
+  var _second = 1000;
+  var _minute = _second * 60;
+  var _hour = _minute * 60;
+  var _day = _hour * 24;
+  var timer;
+  
+  console.log('show_remaining');
+  var now = new Date();
+  var distance = end - now;
+  if (distance < 0) {
+      clearInterval(timer);
+      document.querySelector('#gitApiCallsAdd').innerText += 'EXPIRED!';
+
+      //on reset time reached, reset no of calls available
+      check_remaining_calls();
+
+      return;
+  }
+  var days = Math.floor(distance / _day);
+  var hours = Math.floor((distance % _day) / _hour);
+  var minutes = Math.floor((distance % _hour) / _minute);
+  var seconds = Math.floor((distance % _minute) / _second);
+
+  //document.querySelector('#gitApiCallsAdd').innerText += days + 'days ';
+  //document.querySelector('#gitApiCallsAdd').innerText += hours + 'hrs ';
+  document.querySelector('#gitApiCallsAdd').innerText += minutes + ' min ';
+  document.querySelector('#gitApiCallsAdd').innerText += seconds + ' s';
+}

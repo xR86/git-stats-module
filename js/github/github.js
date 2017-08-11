@@ -1,3 +1,5 @@
+//https://developer.github.com/v3/#rate-limiting
+
 /*
 api links
 https://developer.github.com/v3/repos/commits/
@@ -35,7 +37,9 @@ var interval = setInterval(function() {
       get_repos();
       //get_lang();
       //document.getElementById("complete-dialog").click();
-      $("#open-modal").click();
+      if(window.location.hostname != "localhost"){
+        $("#open-modal").click();
+      }
   }
 }, 100);
 
@@ -57,6 +61,9 @@ function check_remaining_calls(){
     console.log('xhrResp["rate"]: ', parsedXhrResp["rate"]);
     console.log('xhrResp["rate"]["remaining"]: ', parsedXhrResp["rate"]["remaining"]);
     document.querySelector('#gitApiCalls').innerText = parsedXhrResp["rate"]["remaining"];
+    // document.querySelector('#gitApiCallsAdd').innerHTML += '<br/>';
+    // show_remaining(unix_to_js(parsedXhrResp["rate"]["reset"])["date"]);
+
     console.log('==end check_remaining_calls*/');
   });
 }
