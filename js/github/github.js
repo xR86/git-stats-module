@@ -149,7 +149,7 @@ function get_orgs(){
       elem.push(elemM);
     }
     //console.log(response);
-    document.querySelector('#fullResponseOrgs').value = xhrResp;
+    //document.querySelector('#fullResponseOrgs').value = xhrResp;
     document.querySelector('#responseOrgs').value = proc;
     //document.querySelector('#orgs-container').appendChild = elem;
     //elem.forEach(callback.bind(thisArg));
@@ -185,7 +185,7 @@ function get_repos(){
       elem.push(elemM);
     }
     //console.log(response);
-    document.querySelector('#fullResponseRepos').value = xhrResp;
+    //document.querySelector('#fullResponseRepos').value = xhrResp;
     document.querySelector('#responseRepos').value = proc_str;
 
     document.querySelector('#repos-count').textContent = elem.length;
@@ -208,7 +208,7 @@ function get_user(){
       '<div>' + response.login + '</div>'
       + '</a></div>';
     //console.log(response);
-    document.querySelector('#fullResponseUser').value = xhrResp;
+    //document.querySelector('#fullResponseUser').value = xhrResp;
     document.querySelector('#user-container').insertAdjacentHTML( 'beforeend', elemM );
   });
 }
