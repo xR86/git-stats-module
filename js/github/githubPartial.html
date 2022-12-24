@@ -13,9 +13,9 @@
         <h4 class="modal-title">'Tis not finished</h4>
       </div>
       <div class="modal-body">
-        <img src="img/knights_of_ni.gif">
+        <img src="assets/knights_of_ni.gif">
         <audio id="modal-sound1">
-          <source src="http://www.intriguing.com/mp/_sounds/hg/knights.wav" type="audio/ogg">
+          <source src="assets/knights.wav" type="audio/ogg">
           Your browser does not support the audio element.
         </audio>
       </div>
@@ -28,7 +28,7 @@
           </div>
         </button>
         <audio id="modal-sound2">
-          <source src= "http://www.intriguing.com/mp/_sounds/hg/shrub.wav" type="audio/ogg">
+          <source src= "assets/shrub.wav" type="audio/ogg">
           Your browser does not support the audio element.
         </audio>
         
@@ -55,13 +55,31 @@
 }
 
 .modal-content{
-  background-image: url("img/wood_bg.jpg");
+  background-image: url("assets/wood_bg.jpg");
   border-style: groove;
   border-color: #634f41;
 }
 
 </style>
 <script>
+// autoplay disabled per https://developer.chrome.com/blog/autoplay/
+// https://stackoverflow.com/a/58004573/6139015
+
+var audio = document.getElementById("modal-sound1");
+audio.autoplay = true;
+// audio.muted = false;
+var promise = audio.play();
+
+if (promise !== undefined) {
+  promise.then(_ => {
+    // Autoplay started!
+  }).catch(error => {
+    // Autoplay was prevented.
+    // Show a "Play" button so that user can start playback.
+    console.log('Autoplay prevented');
+  });
+}
+
 $( "#complete-dialog" ).on('show.bs.modal', function(){
     //stop original if playing
     var original = document.getElementById("modal-sound2");
