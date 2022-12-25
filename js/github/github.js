@@ -17,6 +17,7 @@ function harness(){
   get_request_old('#address-2', '#response-2');
   get_orgs();
   get_repos();
+  //get_labels();
   get_pulls();
   get_user();
   //get_projects();
@@ -192,6 +193,57 @@ function get_repos(){
     elem.forEach( function(item){
       document.querySelector('#repos-container').insertAdjacentHTML( 'beforeend', item );
     });
+  });
+}
+
+function get_labels(){
+  get_request_simple('https://api.github.com/users/xR86/repos', function (err, xhrResp) {
+    if (err) { throw err; }
+
+    var response = JSON.parse(xhrResp);
+
+    for (var i = 0; i < response.length; i++){
+      // append repo
+      var repoElem = '<div class=\"' + (response[i].fork ? 'fork-link':'') + '\">' + 
+        '<a href=\"' + response[i].html_url + '\">' + response[i].full_name + '&nbsp;' +
+        (response[i].fork ? '<i class=\"fa fa-code-fork\" aria-hidden=\"true\"></i>':'') +
+        '</a>- <a href="' 
+        + response[i].html_url + '/labels">labels</a>:</div>';
+      //document.querySelector('#labels-container').insertAdjacentHTML( 'beforeend', repoElem );
+
+      var repoLink = response[i].html_url;
+
+      get_request_simple(`https://api.github.com/repos/${response[i].full_name}/labels`, function (err, xhrResp) {
+        if (err) { throw err; }
+
+        var response = JSON.parse(xhrResp);
+        //console.log(response)
+
+        var allLabels = '';
+        for (var i = 0; i < response.length; i++){
+          var actualURL = `${repoLink}/issues?q=label%3A${response[i].name}`;
+          
+          var labelElem = `<div>
+            <a href="${actualURL}">
+              -&gt; ${response[i].name}
+            </a> &nbsp;
+            <span 
+              style="
+                background-color: #${response[i].color};
+                padding-left: 1rem;
+                border-radius: 29%
+              ">&nbsp;
+            </span></div>`;
+          allLabels += labelElem;
+        }
+        document.querySelector('#labels-container').insertAdjacentHTML( 'beforeend', repoElem+allLabels+'<span>&nbsp;</span>' );
+      });
+
+      // if (i==2){
+      //   break;
+      // }
+    }
+
   });
 }
 

@@ -5,6 +5,8 @@
 		<span>&nbsp;</span>
 	</div> -->
 
+<!-- provide option to Oauth for private repo stats -->
+
 <div id="complete-dialog" class="modal fade in" tabindex="-1" style="display: none;">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -206,6 +208,31 @@ $( "#close-dialog1, #close-dialog2" ).on('click', function(){
       <div class="widget-description">The user has used <span id="lang-count">?</span> languages:</div>
       <div class="list-container" id="lang-container" style="margin: 10px"></div>
     </div>
+  </div>
+
+  <div class="row">
+    <!-- Labels used container --> 
+    <div class="col-md-2 col-md-offset-05 panel">
+      <div id="labels_dev" class="btn btn-primary btn-xs source-button" onclick="toggle_element('#labels_dev_container')">
+        &lt; &gt;
+        <div class="ripple-container"></div>
+      </div>
+
+      <div class="dev-container" id="labels_dev_container">
+        <a class="btn btn-raised btn-primary" onclick="get_labels();">GET labels</a>
+        <!-- should add checkbox here - "Only show non-standard labels", default: false -->
+        <!-- should add fetch one functionality to save on calls made-->
+    
+        <!--<div class="form-group">
+          <label for="comment">Response:</label>
+          <textarea class="form-control" rows="3" id="responseLabels"></textarea>
+        </div> -->
+      </div> 
+
+      <div class="widget-description">The user has used these labels:</div>
+      <div class="list-container" id="labels-container" style="margin: 10px"></div>
+    </div>
+
   </div>
   
   <div class="row">
