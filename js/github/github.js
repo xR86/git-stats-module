@@ -204,14 +204,15 @@ function get_labels(){
 
     for (var i = 0; i < response.length; i++){
       // append repo
-      var repoElem = '<div class=\"' + (response[i].fork ? 'fork-link':'') + '\">' + 
+      const repoElem = '<div class=\"' + (response[i].fork ? 'fork-link':'') + '\">' + 
         '<a href=\"' + response[i].html_url + '\">' + response[i].full_name + '&nbsp;' +
         (response[i].fork ? '<i class=\"fa fa-code-fork\" aria-hidden=\"true\"></i>':'') +
         '</a>- <a href="' 
         + response[i].html_url + '/labels">labels</a>:</div>';
+      
+      const repoLink = response[i].html_url;
       //document.querySelector('#labels-container').insertAdjacentHTML( 'beforeend', repoElem );
 
-      var repoLink = response[i].html_url;
 
       get_request_simple(`https://api.github.com/repos/${response[i].full_name}/labels`, function (err, xhrResp) {
         if (err) { throw err; }
@@ -236,14 +237,14 @@ function get_labels(){
             </span></div>`;
           allLabels += labelElem;
         }
+        // console.log(repoLink);
+        // console.log(allLabels.length);
         document.querySelector('#labels-container').insertAdjacentHTML( 'beforeend', repoElem+allLabels+'<span>&nbsp;</span>' );
       });
-
       // if (i==2){
       //   break;
       // }
     }
-
   });
 }
 
